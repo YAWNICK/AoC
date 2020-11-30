@@ -1,22 +1,38 @@
-
+import os
 
 def compute(s: str):
     ## if single value:
     #s = s.strip()
     ## if multiple values in multiple lines
-    ## assuming no newline at the end of the input file
     #lines = s.splitlines()
+    #lines = lines[:-1] if lines[-1] == '' else lines
     
     return 
 
-def read_input() -> str:
+def read_input(filepath: str) -> str:
     inp = ""
-    with open("input.txt", 'r') as f:
+    with open(filepath, 'r') as f:
         inp = f.read()
     return inp
 
+def run_tests():
+    print("-----TESTS-----")
+    # Fill solutions with should values
+    solutions = []
+    # testing begins here
+    cnt = 1
+    while os.path.exists(f"tests/{cnt}.txt"):
+        if compute(read_input(f"tests/{cnt}.txt")) == solutions[cnt - 1]:
+            print(f"Test {cnt} successful!")
+        else:
+            print(f"Test {cnt} failed!")
+            print(f"  was supposed to be {solutions[cnt - 1]}")
+        cnt += 1
+    print("---TESTS END---")
+
 def main():
-    inp = read_input()
+    run_tests()
+    inp = read_input("input.txt")
     print(compute(inp))
 
 if __name__ == "__main__":
