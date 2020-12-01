@@ -1,5 +1,11 @@
 import os
 
+'''
+Shortcomings:
+- I didn't account for all two/three number to be different
+    1010 would have messed it up
+'''
+
 def compute(s: str):
     ## if single value:
     #s = s.strip()
