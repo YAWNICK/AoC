@@ -38,6 +38,23 @@ def compute2(s: str):
         if sum(nums) == n:
             return min(nums) + max(nums)
 
+# alternative solution for part 2
+def compute2_alt(s: str):
+    lines = s.splitlines()
+    lines = lines[:-1] if lines[-1] == '' else lines
+    lines = list(map(int, lines))
+    n = 88311122
+    nums = [lines[0]]
+    lo, hi = 0, 0
+    while (s := sum(nums)) != n:
+        if s < n:
+            nums.append(lines[hi + 1])
+            hi += 1
+        else:
+            nums = nums[1:]
+            lo += 1
+    return min(nums) + max(nums)
+
 def read_input(filepath: str) -> str:
     inp = ""
     with open(filepath, 'r') as f:
@@ -64,6 +81,7 @@ def main():
     inp = read_input("input.txt")
     print("Part 1:", compute(inp))
     print("Part 2:", compute2(inp))
+    print("Part 2 alt:", compute2_alt(inp))
 
 if __name__ == "__main__":
     main()
