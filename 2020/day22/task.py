@@ -3,7 +3,7 @@ import os
 def get_score(c1, c2):
     w = c1 if c1 else c2
     fac = [i + 1 for i in range(len(w) - 1, -1, -1)]
-    return sum(list(map(lambda x: x[0] * x[1], list(zip(w, fac)))))
+    return sum(map(lambda x: x[0] * x[1], zip(w, fac)))
 
 def compute(s: str):
     ps = s.split('\n\n')
