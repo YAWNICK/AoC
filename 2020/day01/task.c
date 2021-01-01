@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MAXLINES 10000
+
 int part1(int *nums, int size);
 
 int part2(int *nums, int size);
@@ -8,17 +10,16 @@ int part2(int *nums, int size);
 int main(int argc, char *argv[]) {
     
     FILE *fp;
-    int numLines = 200;
 
     fp = fopen("input.txt", "r");
     if (fp == NULL) exit(EXIT_FAILURE);
     
-    int nums[numLines];
-    int i = 0;
-    while (fscanf(fp, "%d", &nums[i]) != EOF) i++;
+    int nums[MAXLINES];
+    int cnt = 0;
+    while (fscanf(fp, "%d", &nums[cnt]) != EOF) cnt++;
 
-    printf("Part 1: %d\n", part1(nums, numLines));
-    printf("Part 2: %d\n", part2(nums, numLines));
+    printf("Part 1: %d\n", part1(nums, cnt));
+    printf("Part 2: %d\n", part2(nums, cnt));
     
     return 0;
 }
