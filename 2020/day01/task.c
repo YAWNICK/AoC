@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
     int nums[MAXLINES];
     int cnt = 0;
     while (fscanf(fp, "%d", &nums[cnt]) != EOF) cnt++;
+    fclose(fp);
 
     printf("Part 1: %d\n", part1(nums, cnt));
     printf("Part 2: %d\n", part2(nums, cnt));
