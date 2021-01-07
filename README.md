@@ -10,4 +10,4 @@ C|Improve language skills by starting each day from scratch and never reusing da
                      1111111111222222
             1234567890123456789012345
     Python  *************************
-    C       ****
+    C       *****
