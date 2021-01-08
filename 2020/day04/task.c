@@ -27,7 +27,7 @@ int main() {
     HashMap *hm = HashMapComp();  // temp hm to collect each pp and store it in pps
     char line[500];
     while (fgets(line, 500, fp) != NULL) {
-        // input.txt must end with a newline, or else the last passport
+        // input.txt must end with an empts line, or else the last passport
         // will not be inserted into pps by the following if statement
         if (*line == '\n') {  // end of a passport
             pps[numpps] = hm;

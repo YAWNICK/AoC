@@ -1,3 +1,4 @@
 *.swp
 *.run
+*.sh
 __pycache__/
