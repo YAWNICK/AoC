@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <inttypes.h>
 
 #define MAXQS 26  // for 26 letters in the alphabet
