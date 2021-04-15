@@ -1,6 +1,6 @@
 import os
 
-def count(s, c):
+def count(s, c):  # count occurrences of char c in string s
     total = 0
     for ch in s:
         if ch == c:
@@ -8,27 +8,24 @@ def count(s, c):
     return total
 
 def compute(s: str):
-    ## if single value:
-    #s = s.strip()
-    ## if multiple values in multiple lines
     lines = s.splitlines()
     lines = lines[:-1] if lines[-1] == '' else lines
-    total = 0
+    total1, total2 = 0, 0
     for line in lines:
-        rule, pw = line.split(':')
-        pw = pw.strip()
+        rule, pw = line.split(': ')
         mm, n = rule.split(' ')
         mi, ma = mm.split('-')
-        ## part 1
-        #if count(pw, n) >= int(mi) and count(pw, n) <= int(ma):
-        #    total += 1
-        ## part 2
+        # part 1
+        c = count(pw, n)
+        if c >= int(mi) and c <= int(ma):
+            total1 += 1
+        # part 2
         if pw[int(ma)-1] == n or pw[int(mi)-1] == n:
-            total += 1
+            total2 += 1
         if pw[int(ma)-1] == n and pw[int(mi)-1] == n:
-            total -= 1
+            total2 -= 1
 
-    return total
+    return (total1, total2)
 
 def read_input(filepath: str) -> str:
     inp = ""
@@ -54,7 +51,9 @@ def run_tests():
 def main():
     run_tests()
     inp = read_input("input.txt")
-    print(compute(inp))
+    res = compute(inp)
+    print(f"Part 1: {res[0]}")
+    print(f"Part 2: {res[1]}")
 
 if __name__ == "__main__":
     main()
