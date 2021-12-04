@@ -2,7 +2,7 @@ import os
 import re
 
 # my tests changed the global variables and I didnt reset them in compute...
-# also: regexes probably make stuff easier!! 
+# 
 
 parents = {}
 total = []
@@ -32,10 +32,7 @@ def compute(s: str):
     ## if multiple values in multiple lines
     lines = s.splitlines()
     lines = lines[:-1] if lines[-1] == '' else lines
-    colors.clear()
-    parents.clear()
-    total.clear()
-    for line in lines:
+    #colors = {}
         name, cont = line.split(' bags contain ')
         colors[name] = []
         if cont == "no other bags.":
@@ -62,7 +59,7 @@ def read_input(filepath: str) -> str:
 def run_tests():
     print("-----TESTS-----")
     # Fill solutions with should values
-    solutions = [32]
+    solutions = [4]
     # testing begins here
     cnt = 1
     while os.path.exists(f"tests/{cnt}.txt"):
@@ -76,7 +73,7 @@ def run_tests():
     print("---TESTS END---")
 
 def main():
-    run_tests()
+    #run_tests()
     inp = read_input("input.txt")
     print(compute(inp))
 
