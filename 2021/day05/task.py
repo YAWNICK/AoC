@@ -1,4 +1,5 @@
 import os
+from functools import reduce
 import re
 from collections import defaultdict
 
@@ -18,14 +19,10 @@ def compute(s: str, part: int):
         else:
             if part == 1: continue 
             ps = (rx, ry)
-        for pos in zip(*ps):
-            s = f"{pos[0]},{pos[1]}"
+        for p in zip(*ps):
+            s = f"{p[0]},{p[1]}"
             spots[s] += 1
-    res = 0
-    for cnt in spots.values():
-        if cnt > 1:
-            res += 1
-    return res
+    return len([v for v in spots.values() if v > 1])
 
 def read_input(filepath: str) -> str:
     inp = ""
