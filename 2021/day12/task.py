@@ -4,16 +4,34 @@ from collections import defaultdict
 G = defaultdict(list)
 res1 = 0
 
-def compute(s: str):
+def compute(s: str, part: int):
     global res1
     global G
+    G = defaultdict(list)
+    res1 = 0
     lines = s.splitlines()
     for line in lines:
         a, b = line.split('-')
         G[a].append(b)
         G[b].append(a)
-    find('start', set(), False, [])
+    if part == 1:
+        find1('start', set(), [])
+    else:
+        find('start', set(), False, [])
     return res1
+
+def find1(node, visited, path):
+    global res1
+    global G
+    path.append(node)
+    if node == 'end':
+        res1 += 1
+        return
+    if node.islower():
+        visited.add(node)
+    for nb in G[node]:
+        if nb not in visited:
+            find1(nb, visited.copy(), path.copy())
 
 def find(node, visited, hasdouble, path):
     global res1
@@ -59,7 +77,8 @@ def run_tests():
 def main():
     #run_tests()
     inp = read_input("input.txt")
-    print(compute(inp))
+    print("Part 1:", compute(inp, 1))
+    print("Part 2:", compute(inp, 2))
 
 if __name__ == "__main__":
     main()

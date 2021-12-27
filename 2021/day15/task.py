@@ -13,10 +13,11 @@ def prep(lines):
     return lines
 
 
-def compute(s: str):
+def compute(s: str, part: int):
     lines = s.splitlines()
     lines = [list(map(int, line)) for line in lines]
-    lines = prep(lines)
+    if part == 2:
+        lines = prep(lines)
     lx = len(lines[0])
     ly = len(lines)
     costs = {}
@@ -73,7 +74,8 @@ def run_tests():
 def main():
     #run_tests()
     inp = read_input("input.txt")
-    print(compute(inp))
+    print("Part 1:", compute(inp, 1))
+    print("Part 2:", compute(inp, 2))
 
 if __name__ == "__main__":
     main()

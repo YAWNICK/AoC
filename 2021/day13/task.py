@@ -3,11 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def compute(s: str):
-    ## if single value:
-    #s = s.strip()
-    ## if multiple values in multiple lines
     lines = s.splitlines()
-    #lines = lines[:-1] if lines[-1] == '' else lines
     ps = set()
     folds = []
     ip = 0
@@ -21,8 +17,8 @@ def compute(s: str):
         else:
             d, val = line.split('=')
             folds.append((d[-1], int(val)))
-    print("Startd with", len(ps), "dots.")
-    for d, val in folds:
+    #print("Startd with", len(ps), "dots.")
+    for i, (d, val) in enumerate(folds):
         for x, y in ps.copy():
             if d == 'x' and x > val:
                 ps.remove((x,y))
@@ -30,9 +26,14 @@ def compute(s: str):
             if d == 'y' and y > val:
                 ps.remove((x,y))
                 ps.add((x, y - 2*(y-val)))
-        print(len(ps))
+        if i == 0:
+            print("Part 1:", len(ps))
     l = list(ps)
+    ml = max(map(lambda x: x[1], l))
+    l = list(map(lambda x: (x[0], ml-x[1]), l))
+    print("Part 2: see plot.")
     plt.scatter(*zip(*l))
+    plt.subplots_adjust(bottom=0.73)
     plt.show()
     return 
 

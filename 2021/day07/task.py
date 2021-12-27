@@ -1,25 +1,20 @@
 import os
 
-def compute(s: str):
-    ## if single value:
+def compute(s: str, part: int):
     s = s.strip()
-    ## if multiple values in multiple lines
-    #lines = s.splitlines()
-    #lines = lines[:-1] if lines[-1] == '' else lines
     s = list(map(int, s.split(',')))
-    n = len(s)
-    x = sum(s) / n
-    x = 467
     ress = []
-    for x in range(700):
+    for x in range(max(s)):
         res = 0
         for i in s:
-            res += tr(abs(x-i))
+            res += tr(abs(x-i)) if part == 2 else abs(x-i)
         ress.append(res)
-    return ress.index(min(ress))
+    return min(ress)
+    #return ress.index(min(ress))
 
 def tr(x):
-    return sum(range(x+1))
+    return x*(x+1)//2
+    #return sum(range(x+1))
 
 def read_input(filepath: str) -> str:
     inp = ""
@@ -45,7 +40,8 @@ def run_tests():
 def main():
     run_tests()
     inp = read_input("input.txt")
-    print(compute(inp))
+    print("Part 1:", compute(inp, 1))
+    print("Part 2:", compute(inp, 2))
 
 if __name__ == "__main__":
     main()
