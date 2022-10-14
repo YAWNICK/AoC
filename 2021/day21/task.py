@@ -21,12 +21,7 @@ def compute2():
     return max(ws)
 
 def compute(s: str):
-    ## if single value:
-    #s = s.strip()
-    ## if multiple values in multiple lines
-    #lines = s.splitlines()
-    #lines = lines[:-1] if lines[-1] == '' else lines
-    dist = {3:1, 4:3, 5:6, 6:7, 7:6, 8:3, 9:1}
+    #dist = {3:1, 4:3, 5:6, 6:7, 7:6, 8:3, 9:1}
     p1s = 1
     p2s = 10
     die = 0
@@ -45,21 +40,12 @@ def compute(s: str):
             if die > 100:
                 die -= 100
             d += die
-        #d = ((die+1) % 100)+((die+2)%100)+((die+3)%100)
-        #die+= 3
-        #die %= 100
         ps[turn-1] += d
         ps[turn-1] %= 10
-        #if ps[turn-1] >10:
-        #    ps[turn-1] -= 10
         scores[turn-1] += ps[turn-1]+1
         turn = 2 if turn == 1 else 1
-    print(scores)
-    print(ps)
-    print(drs)
     ls = scores[0] if scores[0] < 1000 else scores[1]
-    print(ls*drs)
-    return 
+    return ls*drs 
 
 def read_input(filepath: str) -> str:
     inp = ""
@@ -85,7 +71,8 @@ def run_tests():
 def main():
     run_tests()
     inp = read_input("input.txt")
-    print(compute2())
+    print("Part 1:", compute(inp))
+    print("Part 2:", compute2())
 
 if __name__ == "__main__":
     main()

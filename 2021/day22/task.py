@@ -51,11 +51,13 @@ def points_lit(bs):
         return total_before_latest - on_cnt_in_b
 
 
-def compute(s: str):
+def compute(s: str, part: int):
     lines = s.splitlines()
     pat = '(on|off) x=(-?\d+)..(-?\d+),y=(-?\d+)..(-?\d+),z=(-?\d+)..(-?\d+)'
     lines = [(l,int(xmin),int(xmax),int(ymin),int(ymax),int(zmin),int(zmax)) for l,xmin,xmax,ymin,ymax,zmin,zmax in map(lambda line: re.match(pat, line).groups(), lines)]
     cubes = []
+    if part == 1:
+        lines = lines[:20]
     for i, cube in enumerate(lines):
         block = Block(*cube)
         cubes.append(block)
@@ -87,7 +89,8 @@ def run_tests():
 def main():
     run_tests()
     inp = read_input("input.txt")
-    print(compute(inp))
+    print("Part 1:", compute(inp, 1))
+    print("Part 2:", compute(inp, 2))
 
 if __name__ == "__main__":
     main()
