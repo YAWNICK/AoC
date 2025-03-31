@@ -1,0 +1,22 @@
+Ich hatte heute morgen ne Idee für einen AoC Input Parser, der hoffentlich
+- einfacher ist als manual splits oder regex
+- schnell hinzuschreiben ist
+- auf die meisten Arten von inputs anwendbar ist
+
+Hab jetzt Version 1 und schaue ab morgen mal, wie hilfreich das ist:)
+
+Man definiert wie geparsed wird mit einer expression und dann wird alles in geschachtelte Listen gepackt.
+expr = s oder i oder [delim][freq][1 oder mehrere expr]
+s: leave string as string
+i: convert string to int
+delim: delimiter on which to split
+freq=1: apply the following 1 expr to all split parts
+freq=2..9=n: apply the following n exprs to their respective split part
+
+s, i oder 1..9 dürfen halt nicht delimiter sein, aber das kommt quasi nie vor.
+
+Beispiel:
+list of comma separated ints: ',1i'
+grid: '\n1s'
+each line string comma int: '\n1,2si'
+2023 day 2: '\n1: 2 2si; 1, 1 2is'

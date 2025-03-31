@@ -1,6 +1,7 @@
 import os
 from pprint import pprint
 from collections import defaultdict
+from sympy import symbols, Eq, solve
 
 def compute(s: str):
     ## if single value:
@@ -15,27 +16,28 @@ def compute(s: str):
         d = list(map(int, d.split(', ')))
         Ps.append(p+d)
     # TESTING
-    #Ps = Ps[:2]
+    #Ps = Ps[:3]
     # TESTING
     Pslen = len(Ps)
-    print(Pslen)
-    D = defaultdict(int)
-    for i in range(Pslen - 1):
-        print('position', i)
-        j = i+1
-        Ps1 = [(x+i*dx, y+i*dy, z+i*dz) for x,y,z,dx,dy,dz in Ps]
-        Ps2 = [(x+j*dx, y+j*dy, z+j*dz) for x,y,z,dx,dy,dz in Ps]
-        for ii in range(len(Ps1)):
-            for jj in range(len(Ps2)):
-                if ii == jj:
-                    continue
-                x1, y1, z1 = Ps1[ii]
-                x2, y2, z2 = Ps2[jj]
-                D[(x2-x1, y2-y1, z2-z1)] += 1
-    print(len(DD))
-    tops = sorted(D.items(), key=lambda x: x[1])[:20]
-    for t in tops:
-        print(t)
+    rpx, rpy, rpz, rvx, rvy, rvz = symbols('rpx rpy rpz rvx rvy rvz')
+    vs = [rpx, rpy, rpz, rvx, rvy, rvz]
+    es = []
+    for i, h in enumerate(Ps):
+        hpx, hpy, hpz, hvx, hvy, hvz = h
+        th, tr = symbols(f'th{i} tr{i}')
+        #vs.extend([th, tr])
+        eq1 = Eq((hpx-rpx)*(rvy-hvy), (hpy-rpy)*(rvx-hvx))
+        eq2 = Eq((hpx-rpx)*(rvz-hvz), (hpz-rpz)*(rvx-hvx))
+        es.extend([eq1,eq2])
+    print("created all vars and eqs")
+    print(vs)
+    print(es)
+    sol = solve(es, vs)
+    print("finished solving")
+    print(sol)
+    print(sol[0][0] + sol[0][1] + sol[0][2])
+
+    #print(sol[rpx], sol[rpy], sol[rpz], sol[rvx], sol[rvy], sol[rvz])
     return None 
 
 def colltest(x1, y1, z1, dx1, dy1, dz1, x2, y2, z2, dx2, dy2, dz2):
